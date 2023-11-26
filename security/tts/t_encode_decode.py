@@ -10,10 +10,12 @@ def t1():
     ds = DFF_Security()
 
     jwt_info = {
+
             "sub": "1234567890",
-            "name": "John Doe",
-            "cool_dude": "Of course!",
+            "name": "Muchen",
+            "intelligence": "unbelievably high",
             "iat": 1516239022
+
     }
 
     token = ds.encode_token(jwt_info)
@@ -24,7 +26,9 @@ def t2():
     ds = DFF_Security()
 
     # Used JWT.io to encode using secret.
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiY29vbF9kdWRlIjoiT2YgY291cnNlISIsImlhdCI6MTUxNjIzOTAyMn0.UN2wXrK7mzU_B1dZnWtHQOMA8G_sVrtMFx3XMdeapFM"
+
+    token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik11Y2hlbiIsImludGVsbGlnZW5jZSI6InVuYmVsaWV2YWJseSBoaWdoIiwiaWF0IjoxNTE2MjM5MDIyfQ.5zwtjvG_EMlos4qOvAXIMHrnqQ1VTj6SqBIqWH_sA6s"
+
     d = ds.decode_token(token)
 
     print("t2 decode = \n", json.dumps(d, indent=2))

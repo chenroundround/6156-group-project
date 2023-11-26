@@ -11,7 +11,7 @@ from pydantic import BaseModel
 
 # to get a string like this run:
 # openssl rand -hex 32
-SECRET_KEY = "b63486c172929fbda280d0e59b8546945d683cda5f281ca9da40f10ae0988fd3"
+SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -88,14 +88,14 @@ app = FastAPI(
     version="0.0.1",
     # terms_of_service="http://example.com/terms/",
     contact={
-        "name": "Tianshu Liu",
-        "url": "https://github.com/TianshuLiu0307",     # unable to link to github page
+        "name": "Muchen Liang",
+        "url": "https://github.com/chenroundround",
         # "email": "dp@x-force.example.com",
     },
-    license_info={
-        "name": "Apache 2.0",
-        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
-    },
+    #license_info={
+    #    "name": "Apache 2.0",
+    #    "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+    #},
 )
 
 
@@ -166,7 +166,7 @@ async def get_current_active_user(
     return current_user
 
 
-@app.post("https://github.com/TianshuLiu0307/6156-frontend", response_model=Token)
+@app.post("/token", response_model=Token)
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()]
 ):
@@ -184,14 +184,14 @@ async def login_for_access_token(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@app.get("https://github.com/TianshuLiu0307/6156-frontend", response_model=User)
+@app.get("/users/me/", response_model=User)
 async def read_users_me(
     current_user: Annotated[User, Depends(get_current_active_user)]
 ):
     return current_user
 
 
-@app.get("https://github.com/TianshuLiu0307/6156-frontend")
+@app.get("/users/me/items/")
 async def read_own_items(
     current_user: Annotated[User, Depends(get_current_active_user)]
 ):
@@ -205,5 +205,4 @@ if __name__ == "__main__":
         "sample_user@nowhere.com"
     )
 
-# unable to connect to port 8000
     uvicorn.run(app, host="0.0.0.0", port=8000)
